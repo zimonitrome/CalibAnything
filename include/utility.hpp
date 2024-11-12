@@ -264,13 +264,19 @@ class Util {
 
         static void UndistImg(cv::Mat & img, Eigen::Matrix3f intrinsic, std::vector<double> dist)
         {
+            cv::Mat K;
+            cv::eigen2cv(intrinsic, K);
+
+            // For handling radial and tangential distortion camera model
             cv::Mat I = cv::Mat::eye(3, 3, CV_32FC1);
             cv::Mat mapX, mapY;
             cv::Mat img_undist = cv::Mat(img.size(), CV_32FC3);
-            cv::Mat K;
-            cv::eigen2cv(intrinsic, K);
             cv::initUndistortRectifyMap(K, dist, I, K, img.size(), CV_32FC1, mapX, mapY);
             cv::remap(img, img_undist, mapX, mapY, cv::INTER_LINEAR);
+
+            // // For handling RATIONAL_POLYNOMIAL camera distortion
+            // cv::undistort(img, img_undist, K, dist);
+
             img = img_undist;
         }
 

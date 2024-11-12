@@ -6,6 +6,9 @@ This package provides an automatic and target-less LiDAR-camera extrinsic calibr
 - pcl 1.10
 - opencv
 - eigen 3
+```
+sudo apt install libpcl-dev libopencv-dev libeigen3-dev
+```
 
 ## Compile
 ```shell
@@ -17,13 +20,11 @@ mkdir -p build && cd build
 cmake .. && make
 ```
 
-## Run Example
-We provide examples of two dataset. You can download the processed data at [Google Drive](https://drive.google.com/file/d/1OCtbIGilLOBnHzY5VNHqRZzbxXj3xiXc/view?usp=drive_link) or [BaiduNetDisk](https://pan.baidu.com/s/1qAt7nYw5hYoJ1qrH0JosaQ?pwd=417d):
-```
-# baidunetdisk
-Link: https://pan.baidu.com/s/1qAt7nYw5hYoJ1qrH0JosaQ?pwd=417d 
-Code: 417d
-```
+## Download data
+
+Example data can be downloaded [here](https://drive.google.com/file/d/1OCtbIGilLOBnHzY5VNHqRZzbxXj3xiXc/view?usp=drive_link).
+
+## Run inference
 
 Run the command:
 ```shell

@@ -6,6 +6,8 @@ SET(CMAKE_CXX_FLAGS "-pthread")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall")
 
+link_directories(/usr/lib/x86_64-linux-gnu)
+
 find_package(PCL REQUIRED)
 find_package(Boost REQUIRED system)
 find_package(OpenCV REQUIRED)
@@ -22,8 +24,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 file(GLOB_RECURSE PARSER_PATH src/*.cpp)
 add_library(${PROJECT_NAME} STATIC ${PARSER_PATH})
-target_link_libraries(${PROJECT_NAME} libjsoncpp.a ${OpenCV_LIBS} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} ${Boost_SYSTEM_LIBRARY})
 
 add_executable(run_lidar2camera src/run_lidar2camera.cpp)
-target_link_libraries(run_lidar2camera ${PROJECT_NAME})
-target_link_libraries(run_lidar2camera ${PCL_LIBRARIES})
+
+# Link libraries to the executable after it has been defined
+target_link_libraries(run_lidar2camera ${PROJECT_NAME} jsoncpp ${PCL_LIBRARIES})
