@@ -266,11 +266,11 @@ class Util {
         {
             cv::Mat K;
             cv::eigen2cv(intrinsic, K);
+            cv::Mat img_undist = cv::Mat(img.size(), CV_32FC3);
 
             // For handling radial and tangential distortion camera model
             cv::Mat I = cv::Mat::eye(3, 3, CV_32FC1);
             cv::Mat mapX, mapY;
-            cv::Mat img_undist = cv::Mat(img.size(), CV_32FC3);
             cv::initUndistortRectifyMap(K, dist, I, K, img.size(), CV_32FC1, mapX, mapY);
             cv::remap(img, img_undist, mapX, mapY, cv::INTER_LINEAR);
 
